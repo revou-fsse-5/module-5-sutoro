@@ -13,9 +13,14 @@ interface Product {
   };
 }
 
+interface Category {
+  id: number;
+  name: string;
+}
+
 interface HomePageProps {
   products: Product[];
-  categories: { id: number; name: string }[];
+  categories: Category[];
 }
 
 const HomePage: React.FC<HomePageProps> = ({ products, categories }) => {
@@ -79,8 +84,8 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories }) => {
 // Fetching data with SSR
 export const getServerSideProps = async () => {
   try {
-    const productsResponse = await axios.get('https://api.escuelajs.co/api/v1/products');
-    const categoriesResponse = await axios.get('https://api.escuelajs.co/api/v1/categories');
+    const productsResponse = await axios.get<Product[]>('https://api.escuelajs.co/api/v1/products');
+    const categoriesResponse = await axios.get<Category[]>('https://api.escuelajs.co/api/v1/categories');
 
     return {
       props: {

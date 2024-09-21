@@ -9,8 +9,8 @@ interface User {
 }
 
 const Login: React.FC = () => {
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter(); // Next.js useRouter for navigation
 
   // Form validation schema using Yup
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting }: { isSubmitting: boolean }) => (
             <Form>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
